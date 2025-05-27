@@ -127,16 +127,6 @@ You now have a:
 * **Week-level background coloring** across months
 * **Scalable architecture** for adding features like:
 
-  * Year view
-  * Custom user events
-  * Reminders or notifications
+ 
 
----
 
-Let me know if you'd like:
-
-* Backend caching proxy (Node.js/Spring Boot)
-* Offline support with local DB
-* Integration with Google Calendar or Outlook
-
-You're on a solid path, Vineeth 👌
