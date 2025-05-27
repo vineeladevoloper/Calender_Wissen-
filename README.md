@@ -10,7 +10,7 @@ Build a **React-based calendar** that:
 * Fetches real-time data from a **Universal Holiday API**
 * Highlights entire weeks:
 
-  * **Light Green**: 1 or fewer holidays
+  * **Light Blue**: 1 or fewer holidays
   * **Dark Green**: more than 1 holiday
 * Works across month boundaries (e.g., Dec 31 + Jan 1 = same week)
 
