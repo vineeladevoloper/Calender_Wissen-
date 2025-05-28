@@ -127,6 +127,32 @@ You now have a:
 * **Week-level background coloring** across months
 * **Scalable architecture** for adding features like:
 
- 
+
+
+**USA**
+If only one holiday Light Blue
+![USA(1)](https://github.com/user-attachments/assets/059e1e10-065d-4e6d-b92e-f4b00c22e8f1)
+More than One Dark Green
+![USA(2)](https://github.com/user-attachments/assets/e5eab5ab-86f1-46b3-9f58-a9a4331e91d3)
+**India**
+If only one holiday Light Blue
+![India(1)](https://github.com/user-attachments/assets/8f6dec6a-5448-40c0-9c83-b6784601f04c)
+More than One Dark Green
+![India(2)](https://github.com/user-attachments/assets/7612a289-9c01-41ab-b963-c6b854d1c340)
+**UK**
+If only one holiday Light Blue
+![UK(1)](https://github.com/user-attachments/assets/72c71981-a7b6-400b-8736-50418c7c9957)
+More than One Dark Green
+![uk(2)](https://github.com/user-attachments/assets/6dfda084-14e1-4ead-962b-1baf4b921831)
+**Germany**
+If only one holiday Light Blue
+![Germany(1)](https://github.com/user-attachments/assets/61f77791-f0e2-4528-8d4e-c0d3c0976d20)
+More than One Dark Green
+![Germany(2)](https://github.com/user-attachments/assets/08a34bc6-9714-4abc-91f2-c5b4c6b09d50)
+If No Holiday 
+![If_No Holiday](https://github.com/user-attachments/assets/f35affb6-0e16-4b2d-aa97-f59fe47b161e)
+
+
+
 
 
