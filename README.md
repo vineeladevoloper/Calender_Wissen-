@@ -78,6 +78,16 @@ Build a **React-based calendar** that:
 
 ---
 
+Here’s a concise 5-line summary of how **holiday mode** is implemented:
+
+1. A `showHolidays` state is added to toggle holiday mode on or off.
+2. The toggle button switches `showHolidays` between `true` and `false`.
+3. When `showHolidays` is `true`, only weeks containing holidays are rendered.
+4. When `showHolidays` is `false`, the full calendar is shown with no event highlights.
+5. The calendar UI adjusts cell backgrounds and event visibility based on the `showHolidays` flag.
+
+-------------
+
 ## 🔁 Data Flow
 
 1. **User selects country** → triggers API call for holidays
