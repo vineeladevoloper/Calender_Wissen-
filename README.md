@@ -152,6 +152,11 @@ More than One Dark Green
 If No Holiday 
 ![If_No Holiday](https://github.com/user-attachments/assets/f35affb6-0e16-4b2d-aa97-f59fe47b161e)
 
+Holiday Mode Function 
+![Screenshot 2025-05-30 154426](https://github.com/user-attachments/assets/1d4b8ec1-6ba5-457c-babb-71b5a0c3540a)
+
+
+
 
 
 
