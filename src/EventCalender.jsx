@@ -12,7 +12,7 @@ const days = [
   "Saturday",
 ];
 
-const MonthWiseCalendar = ({ eventsMapper, month, year }) => {
+const MonthWiseCalendar = ({ eventsMapper, month, year, showHolidays }) => {
   const today = new Date(year, month);
   const firstDateOfMonth = startOfMonth(today);
   const lastDate = lastDayOfMonth(today).getDate();
@@ -30,11 +30,9 @@ const MonthWiseCalendar = ({ eventsMapper, month, year }) => {
     }, {});
   }, [eventsMapper, month, year]);
 
-  // Build calendar cells (including previous month empty cells)
   const totalCells = firstDay + lastDate;
   const totalWeeks = Math.ceil(totalCells / 7);
 
-  // Create an array of weeks with background classification
   const weekColorMap = useMemo(() => {
     const weeks = [];
 
@@ -73,48 +71,74 @@ const MonthWiseCalendar = ({ eventsMapper, month, year }) => {
         </div>
       ))}
 
-      {Array.from({ length: totalWeeks * 7 }).map((_, index) => {
-        const dayNum = index - firstDay + 1;
-        const weekIndex = Math.floor(index / 7);
+      {Array.from({ length: totalWeeks })
+        .flatMap((_, weekIndex) => {
+          const startIndex = weekIndex * 7;
+          const weekDays = [];
 
-        const isInMonth = dayNum > 0 && dayNum <= lastDate;
-        const isToday =
-          netToday.getDate() === dayNum &&
-          netToday.getMonth() === month &&
-          netToday.getFullYear() === year;
+          let weekHasHoliday = false;
 
-        const event = currentMonthMapper[dayNum];
+          for (let i = 0; i < 7; i++) {
+            const index = startIndex + i;
+            const dayNum = index - firstDay + 1;
+            const isInMonth = dayNum > 0 && dayNum <= lastDate;
 
-        return (
-          <div key={index}>
-            <div
-              className={`border-2 flex flex-col items-center w-full h-28 relative ${
-                isInMonth ? weekColorMap[weekIndex] : "bg-gray-100"
-              }`}
-            >
-              {isToday && isInMonth && (
-                <div className="absolute top-1 right-1">
-                  <div className="rounded-full bg-green-800 w-3 h-3"></div>
-                </div>
-              )}
-              <div className="flex items-center justify-center h-5 mt-1 text-sm font-medium">
-                <span className={weekColorMap[weekIndex].includes("green-800") ? "text-white" : "text-gray-700"}>
-                  {isInMonth ? dayNum : ""}
-                </span>
-              </div>
-              {isInMonth &&
-                event?.map((e, i) => (
-                  <div
-                    key={i}
-                    className="mt-1 px-1 py-1 text-xs bg-green-200 rounded shadow text-center w-full"
-                  >
-                    {e.title}
+            if (isInMonth && currentMonthMapper[dayNum]?.length > 0) {
+              weekHasHoliday = true;
+            }
+
+            weekDays.push({ index, dayNum, isInMonth });
+          }
+
+          if (showHolidays && !weekHasHoliday) return [];
+
+          return weekDays;
+        })
+        .map(({ index, dayNum, isInMonth }) => {
+          const weekIndex = Math.floor(index / 7);
+          const isToday =
+            netToday.getDate() === dayNum &&
+            netToday.getMonth() === month &&
+            netToday.getFullYear() === year;
+          const event = currentMonthMapper[dayNum];
+
+          return (
+            <div key={index}>
+              <div
+                className={`border-2 flex flex-col items-center w-full h-28 relative ${
+                  isInMonth ? weekColorMap[weekIndex] : "bg-gray-100"
+                }`}
+              >
+                {isToday && isInMonth && (
+                  <div className="absolute top-1 right-1">
+                    <div className="rounded-full bg-green-800 w-3 h-3"></div>
                   </div>
-                ))}
+                )}
+                <div className="flex items-center justify-center h-5 mt-1 text-sm font-medium">
+                  <span
+                    className={
+                      weekColorMap[weekIndex].includes("green-800")
+                        ? "text-white"
+                        : "text-gray-700"
+                    }
+                  >
+                    {isInMonth ? dayNum : ""}
+                  </span>
+                </div>
+                {isInMonth &&
+                  showHolidays &&
+                  event?.map((e, i) => (
+                    <div
+                      key={i}
+                      className="mt-1 px-1 py-1 text-xs bg-green-200 rounded shadow text-center w-full"
+                    >
+                      {e.title}
+                    </div>
+                  ))}
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
     </div>
   );
 };
@@ -123,6 +147,7 @@ export const EventCalendar = ({ events }) => {
   const today = new Date();
   const [month, setMonth] = useState(today.getMonth());
   const [year, setYear] = useState(today.getFullYear());
+  const [showHolidays, setShowHolidays] = useState(true);
 
   const eventsMapper = useMemo(() => {
     return events.reduce((acc, event) => {
@@ -163,11 +188,18 @@ export const EventCalendar = ({ events }) => {
         <div className="ml-4 font-semibold">
           {month + 1}/{year}
         </div>
+        <button
+          className="ml-4 px-2 py-1 border rounded bg-gray-200 hover:bg-gray-300"
+          onClick={() => setShowHolidays((prev) => !prev)}
+        >
+          {showHolidays ? "Hide Holidays" : "Show Holidays"}
+        </button>
       </div>
       <MonthWiseCalendar
-        eventsMapper={eventsMapper}
+        eventsMapper={ eventsMapper}
         month={month}
         year={year}
+        showHolidays={showHolidays}
       />
     </div>
   );
